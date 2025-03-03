@@ -11,16 +11,23 @@ import {
 import { useVideoStore } from "@/state/videoStore";
 import { useRouter } from "expo-router";
 import VideoPlayerModal from "@/modals/VideoPlayerModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HomeScreen() {
   // Video listesini Zustand store'dan alıyoruz
   const videos = useVideoStore((state) => state.videos);
+  // Videoları getirmek için Zustand'daki fonksiyonu kullanıyoruz
+  const loadVideos = useVideoStore((state) => state.loadVideos);
   // Videoları silmek için Zustand'daki fonksiyonu kullanıyoruz
   const removeVideo = useVideoStore((state) => state.removeVideo);
   // Modalın açık olup olmadığını kontrol eden state
   const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();
+
+  // Uygualam ilk açıldığında kayıt edilen videoları çağırır
+  useEffect(() => {
+    loadVideos();
+  }, []);
 
   // Silme işlemini gerçekleştiren fonksiyon
   const handleDelete = (id, uri) => {
