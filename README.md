@@ -74,7 +74,7 @@ Expo ile uygulamanın APK dosyasını oluşturmak için aşağıdaki adımları 
 ## 5. Önemli Notlar
 
 - **FFMPEG entegrasyonu**, Expo EAS Build kullanılarak test edilmiştir. Geliştirme ortamında çalıştırmadan önce cihazınızın FFMPEG destekleyip desteklemediğini kontrol edin.
-- **Zustand ile AsyncStorage kullanımı**, videoların kalıcı olarak saklanmasını sağlar. Eğer videoların kaybolduğunu fark ederseniz, `useEffect` içinde `loadVideos()` çağrıldığından emin olun.
+- **Zustand ile AsyncStorage kullanımı**, videoların kalıcı olarak saklanmasını sağlar.
 - **Expo Go üzerinden test yaparken**, `eas build` ile alınan APK'nın Expo Go'dan farklı çalışabileceğini unutmayın.
 
 ---
