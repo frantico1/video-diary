@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# Video Günlüğü Uygulaması Dokümantasyonu
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bu doküman, Expo kullanılarak geliştirilen **Video Günlüğü Uygulaması**'nın kurulumunu, kullanımını ve APK oluşturma sürecini açıklamaktadır.
 
-## Get started
+## 1. Kurulum
 
-1. Install dependencies
+Projeyi çalıştırmak için aşağıdaki adımları takip edin:
 
-   ```bash
-   npm install
-   ```
+### Gerekli Bağımlılıkları Yükleyin
 
-2. Start the app
+Aşağıdaki komutları terminalde çalıştırarak bağımlılıkları yükleyin:
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```sh
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Ayrıca, Expo geliştirme araçlarını yüklemek için aşağıdaki komutu kullanabilirsiniz:
 
-## Learn more
+```sh
+npm install -g expo-cli
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### Ortam Değişkenleri ve İzinler
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Android cihazlarda video işleme için gerekli izinleri sağladığınızdan emin olun.
 
-## Join the community
+## 2. Kullanım
 
-Join our community of developers creating universal apps.
+Proje dizininde aşağıdaki komutu çalıştırarak uygulamayı Expo Go üzerinden çalıştırabilirsiniz:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```sh
+npx expo start
+```
+
+Ardından QR kodu Expo Go uygulamasıyla tarayarak mobil cihazınızda çalıştırabilirsiniz.
+
+## 3. APK Oluşturma
+
+Expo ile uygulamanın APK dosyasını oluşturmak için aşağıdaki adımları takip edin:
+
+1. **Expo Application Services (EAS) kurulu değilse yükleyin:**
+
+   ```sh
+   npm install -g eas-cli
+   ```
+
+2. **EAS'i başlatın:**
+
+   ```sh
+   npx eas-cli init
+   ```
+
+3. **Geliştirme veya üretim sürümü için build alın:**
+
+   ```sh
+   eas build --platform android
+   ```
+
+4. **Build tamamlandıktan sonra APK dosyanızı indirin ve cihazınıza yükleyin.**
+
+## 4. Kullanılan Teknolojiler ve Bağımlılıklar
+
+### Ana Teknolojiler
+
+- **[Expo](https://expo.dev/)** - React Native uygulamalarını kolayca geliştirmek için kullanılan framework.
+- **[Expo Router](https://expo.github.io/router/docs)** - Sayfa yönlendirme ve navigasyon için.
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - Global state yönetimi için hafif bir çözüm.
+- **[Tanstack Query](https://tanstack.com/query/latest)** - Asenkron veri yönetimi için.
+- **[FFMPEG](https://ffmpeg.org/)** - Video işleme ve kırpma işlemleri için.
+- **[NativeWind](https://www.nativewind.dev/)** - Tailwind CSS'in React Native ile kullanımı için.
+- **[Expo Video](https://docs.expo.dev/versions/latest/sdk/video/)** - Video oynatma ve görüntüleme.
+- **[Zod](https://zod.dev/)** / **[Yup](https://github.com/jquense/yup)** - Form doğrulama için.
+
+## 5. Önemli Notlar
+
+- **FFMPEG entegrasyonu**, Expo EAS Build kullanılarak test edilmiştir. Geliştirme ortamında çalıştırmadan önce cihazınızın FFMPEG destekleyip desteklemediğini kontrol edin.
+- **Zustand ile AsyncStorage kullanımı**, videoların kalıcı olarak saklanmasını sağlar. Eğer videoların kaybolduğunu fark ederseniz, `useEffect` içinde `loadVideos()` çağrıldığından emin olun.
+- **Expo Go üzerinden test yaparken**, `eas build` ile alınan APK'nın Expo Go'dan farklı çalışabileceğini unutmayın.
+
+---
